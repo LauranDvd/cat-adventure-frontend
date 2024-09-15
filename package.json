@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@testing-library/jest-dom": "^6.4.8",
-    "jest-mock": "^29.7.0"
-  }
-}
