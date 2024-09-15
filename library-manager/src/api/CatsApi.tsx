@@ -1,14 +1,13 @@
 import axios from "axios";
-import { Cat, CatWithoutId, errorCat } from "../domain/Cat";
+import { Cat, CatWithoutId, ERROR_CAT } from "../domain/Cat";
 import { CatNumberPair } from "../stores/CatStore";
 import { getRequestConfigWithToken } from "../auth/TokenHandler";
 import { RawUser, UserToBeCreated } from "../domain/User";
 import { CatQuizQuestion } from "../components/cats/OwnedCatDetails";
 
 // const baseBackendUrl = "http://localhost:3000/";
-// const baseBackendUrl = "https://localhost:4443/";
-// const baseBackendUrl = "https://cat-app-backend-7a809be297e0.herokuapp.com/";
-const baseBackendUrl = "https://ec2-13-49-120-237.eu-north-1.compute.amazonaws.com:4443/";
+const baseBackendUrl = "https://localhost:4443/";
+// const baseBackendUrl = "https://ec2-13-49-120-237.eu-north-1.compute.amazonaws.com:4443/";
 // const baseBackendUrl = "http://ec2-13-49-120-237.eu-north-1.compute.amazonaws.com:3000/";
 
 export const makeAllCall = (sortByNameDirection: string, page: number) => {
@@ -20,7 +19,7 @@ export const makeAllCall = (sortByNameDirection: string, page: number) => {
         })
         .catch((error) => {
             console.log("Error fetching cats: " + error);
-            return [errorCat];
+            return [ERROR_CAT];
         });
 }
 
@@ -44,7 +43,7 @@ export const makeGetByIdCall = (id: number) => {
         })
         .catch((error) => {
             console.log("Error getting by id: " + error);
-            return errorCat;
+            return ERROR_CAT;
         });
 }
 
@@ -101,7 +100,7 @@ export const makeGetUserRoleNameCall = (token: string) => {
     return axios
         .get(baseBackendUrl + "users/role-name/", getRequestConfigWithToken(token))
         .then(({ data }) => {
-            console.log('user role name ok: ' + data);
+            console.log('user role name: ' + data);
             return data as string;
         })
         .catch((error) => {
@@ -114,7 +113,7 @@ export const makeGetUserMoneyCall = (token: string) => {
     return axios
         .get(baseBackendUrl + "users/money/", getRequestConfigWithToken(token))
         .then(({ data }) => {
-            console.log('user money ok: ' + data);
+            console.log('user money: ' + data);
             return data as number;
         })
         .catch((error) => {
@@ -127,7 +126,7 @@ export const makeGetAllUsersCall = (token: string) => {
     return axios
         .get(baseBackendUrl + "users/get-all", getRequestConfigWithToken(token))
         .then(({ data }) => {
-            console.log('get all users call ok: ' + data);
+            console.log('get all users call: ' + data);
             return data as RawUser[];
         })
         .catch((error) => {
@@ -140,7 +139,7 @@ export const makeGetOthersRoleNameCall = (othersId: string, token: string) => {
     return axios
         .get(baseBackendUrl + `users/others-role-name?others_id=${othersId}`, getRequestConfigWithToken(token))
         .then(({ data }) => {
-            console.log('other users role name ok: ' + data);
+            console.log('other users role name: ' + data);
             return data as string;
         })
         .catch((error) => {
@@ -164,7 +163,7 @@ export const makeDeleteUserCall = (userId: string, token: string) => {
 }
 
 export const makeUpdateUserRoleCall = (userId: string, newRole: string, token: string) => {
-    console.log(' will call ' + "users/update-role/" + userId);
+    console.log('will call ' + "users/update-role/" + userId);
     return axios.put(
         baseBackendUrl + "users/update-role/" + userId, { newRole: newRole },
         getRequestConfigWithToken(token)
@@ -173,7 +172,7 @@ export const makeUpdateUserRoleCall = (userId: string, newRole: string, token: s
 }
 
 export const makeUpdateUserNameCall = (userId: string, newName: string, token: string) => {
-    console.log(' will call ' + "users/update-name/" + userId);
+    console.log('will call ' + "users/update-name/" + userId);
     return axios.put(
         baseBackendUrl + "users/update-name/" + userId, { newName: newName },
         getRequestConfigWithToken(token)
@@ -195,7 +194,7 @@ export const makeAgeDistributionCall = () => {
 }
 
 export const makeGetMyCatsCall = (token: string) => {
-    console.log('in catsapi, token=' + token);
+    console.log('in catsapi, getMyCats');
     return axios
         .get(baseBackendUrl + "cats/mine", getRequestConfigWithToken(token))
         .then(({ data }) => {
@@ -228,7 +227,7 @@ export const makeUpdateCatCuteness = (catId: number, newCuteness: number) => {
 }
 
 export const makeGetQuizQuestionsCall = () => {
-    console.log('we in api getquizq');
+    console.log('entered api getquizq');
     return axios.post(
         baseBackendUrl + 'cats/quiz-questions/'
     )
@@ -240,11 +239,6 @@ export const makeGetQuizQuestionsCall = () => {
                 questions.push({ question: oneGivenQuestion.question, options: oneGivenQuestion.options, answer: oneGivenQuestion.answer })
 
             return questions;
-
-            // const questions: CatQuizQuestion[] = [];
-            // data.fore
-
-            // return data as CatQuizQuestion[];
         })
         .catch((error) => {
             console.log("Error getting quiz questions: " + error);
@@ -266,7 +260,7 @@ export const makeGetLeaderbordCall = () => {
 }
 
 export const makeSetCatAvatarCall = (catId: number, prompt: string, token: string) => {
-    console.log(`makeSetCatAvatarCall: id=${catId}, prompt=${prompt}, token=${token}`);
+    console.log(`makeSetCatAvatarCall: id=${catId}, prompt=${prompt}`);
     return axios.post(baseBackendUrl + "cats/set-avatar", { catId: catId, prompt: prompt }, getRequestConfigWithToken(token))
         .then(({ data }) => {
             console.log('set avatar response: ' + JSON.stringify(data));
@@ -283,6 +277,6 @@ export const makeGetMyCutestCatCall = (token: string) => {
         })
         .catch((error) => {
             console.log('Error getting my cutest cat: ' + error);
-            return errorCat;
+            return ERROR_CAT;
         });
 }

@@ -41,10 +41,10 @@ describe('if admin', () => {
 
     it('renders correctly', async () => {
         await act(async () => {
-            render(<BrowserRouter><NavigationBar /></BrowserRouter>);  // TODO see if we need router
+            render(<BrowserRouter><NavigationBar /></BrowserRouter>); 
         });
 
-        expect(screen.getByText('CatApp')).toBeInTheDocument();
+        expect(screen.getByText('CatAdv.')).toBeInTheDocument();
         expect(screen.getByText('All cats')).toBeInTheDocument();
         expect(screen.getByText('Add a new cat')).toBeInTheDocument();
     });

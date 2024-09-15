@@ -30,7 +30,7 @@ function CatsTable() {
     const isMd = useMediaQuery(theme.breakpoints.down('md'));
 
     useEffect(() => {
-        console.log('will get claims');
+        console.log('will get token claims');
 
         getIdTokenClaims().then(tokenClaims => {
             if (tokenClaims !== undefined) {
@@ -146,6 +146,7 @@ function MyCats() {
         <Box sx={{ bgcolor: '#f8faca' }}>
             <CatsTable />
             <Divider />
+            Artwork by <a href="https://cat-avatars.vercel.app/">David Revoy</a>, licensed under CC BY 4.0
         </Box>
     );
 }
