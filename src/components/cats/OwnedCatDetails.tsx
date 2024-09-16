@@ -42,7 +42,7 @@ function OwnedCatDetails() {
     const { getCatById, updateCatCuteness, getQuizQuestions, setCatAvatar } = useCatStore();
 
     const [avatarPrompt, setAvatarPrompt] = useState("empty");
-    const [avatarResponse, setAvatarResponse] = useState("Describe how you want your cat to look. Color, eye size, accessories etc.");
+    const [avatarResponse, setAvatarResponse] = useState("Describe how you want your cat to look");
 
     const params = useParams<{ id: string }>();
     const id = params.id;

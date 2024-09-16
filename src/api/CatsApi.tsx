@@ -37,7 +37,7 @@ export const makeCountCall = () => {
 
 export const makeGetByIdCall = (id: number) => {
     return axios
-        .get(baseBackendUrl + "cats/get-by-id/" + id)
+        .get(baseBackendUrl + "cats/" + id)
         .then(({ data }) => {
             return data as Cat;
         })
@@ -73,7 +73,7 @@ export const makeUpdateCall = (id: number, newCat: Cat, token: string) => {
 
 export const makeGetToysPerCatCall = (count: number) => {
     return axios
-        .get(baseBackendUrl + "cats/toys_per_cat?count=" + count)
+        .get(baseBackendUrl + "cats/toys-per-cat?count=" + count)
         .then(({ data }) => {
             return data as CatNumberPair[];
         })
@@ -124,7 +124,7 @@ export const makeGetUserMoneyCall = (token: string) => {
 
 export const makeGetAllUsersCall = (token: string) => {
     return axios
-        .get(baseBackendUrl + "users/get-all", getRequestConfigWithToken(token))
+        .get(baseBackendUrl + "users/", getRequestConfigWithToken(token))
         .then(({ data }) => {
             console.log('get all users call: ' + data);
             return data as RawUser[];
@@ -151,14 +151,14 @@ export const makeGetOthersRoleNameCall = (othersId: string, token: string) => {
 export const makeAddUserCall = (user: UserToBeCreated, token: string) => {
     console.log('makeaddusercall: token=' + JSON.stringify(token));
 
-    return axios.post(baseBackendUrl + "users/create", user, getRequestConfigWithToken(token))
+    return axios.post(baseBackendUrl + "users/", user, getRequestConfigWithToken(token))
         .catch((error) => alert("Invalid user: " + error));
 }
 
 export const makeDeleteUserCall = (userId: string, token: string) => {
     console.log('makeaddusercall: token=' + JSON.stringify(token));
 
-    return axios.delete(baseBackendUrl + "users/delete/" + userId, getRequestConfigWithToken(token))
+    return axios.delete(baseBackendUrl + "users/" + userId, getRequestConfigWithToken(token))
         .catch((error) => console.log("Couldn't delete user: " + error));
 }
 
@@ -261,7 +261,7 @@ export const makeGetLeaderbordCall = () => {
 
 export const makeSetCatAvatarCall = (catId: number, prompt: string, token: string) => {
     console.log(`makeSetCatAvatarCall: id=${catId}, prompt=${prompt}`);
-    return axios.post(baseBackendUrl + "cats/set-avatar", { catId: catId, prompt: prompt }, getRequestConfigWithToken(token))
+    return axios.post(baseBackendUrl + "cats/avatar", { catId: catId, prompt: prompt }, getRequestConfigWithToken(token))
         .then(({ data }) => {
             console.log('set avatar response: ' + JSON.stringify(data));
             return data;
