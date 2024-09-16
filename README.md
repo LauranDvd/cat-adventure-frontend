@@ -1,5 +1,5 @@
 # CatAdventure - frontend
-[Deployed here](www.google.com) \
+[Deployed here](https://ec2-13-49-120-237.eu-north-1.compute.amazonaws.com:5173/) \
 [Backend repository here](https://github.com/LauranDvd/cat-adventure-backend)
 
 ![ceva](images/my_cats_printscreen.png)
